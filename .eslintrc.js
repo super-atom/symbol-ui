@@ -19,16 +19,17 @@ module.exports = {
     'import/warning',
     'import/typescript',
     'jest',
+    'emotion',
   ],
   extends: [
     'eslint:recommended',
     'prettier',
-    'plugin:@typescript-eslint/recommended',
+    'prettier/react',
     'prettier/@typescript-eslint',
+    'plugin:@typescript-eslint/recommended',
     'plugin:react/recommended',
     'plugin:jest/recommended',
     'plugin:jest/style',
-    'prettier/react',
   ],
   rules: {
     'react/jsx-uses-react': 'error',
@@ -38,6 +39,10 @@ module.exports = {
     'jest/no-identical-title': 'error',
     'jest/prefer-to-have-length': 'warn',
     'jest/valid-expect': 'error',
+    'emotion/jsx-import': 'error',
+    'emotion/no-vanilla': 'error',
+    'emotion/import-from-emotion': 'error',
+    'emotion/styled-import': 'error',
   },
   settings: {
     react: {
