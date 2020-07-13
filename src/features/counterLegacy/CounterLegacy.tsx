@@ -7,9 +7,9 @@ import {
   incrementAsync,
   selectCount,
 } from './counterSlice';
-import styles from './Counter.module.css';
+import styles from './CounterLegacy.module.css';
 
-function Counter() {
+function CounterLegacy(): JSX.Element {
   const count = useSelector(selectCount);
   const dispatch = useDispatch();
   const [incrementAmount, setIncrementAmount] = useState('2');
@@ -59,4 +59,4 @@ function Counter() {
   );
 }
 
-export default Counter;
+export default CounterLegacy;

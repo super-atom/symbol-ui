@@ -1,14 +1,16 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
-function HomePage() {
-  const history = useHistory();
+function HomePage(): JSX.Element {
   return (
     <>
       <div>THIS IS HOME</div>
-      <button type="button" onClick={() => history.back()}>
-        Back
-      </button>
+      <hr />
+      <Link to="/counter">Counter</Link>
+      <hr />
+      <Link to="/counter-legacy">CounterLegacy</Link>
+      <hr />
+      <Link to="/image-grid">ImageGrid</Link>
     </>
   );
 }

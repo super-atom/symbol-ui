@@ -1,6 +1,6 @@
 import { call, takeEvery, put } from 'redux-saga/effects';
 import Axios from 'axios';
-import { fetchData } from './profile.slice';
+import { fetchData } from './reducer';
 
 export const sagaActions = {
   FETCH_DATA_SAGA: 'FETCH_DATA_SAGA',

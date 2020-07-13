@@ -12,21 +12,23 @@ module.exports = {
       jsx: true,
     },
   },
-  plugins: ['@typescript-eslint', 'react', 'jest', 'emotion'],
+  plugins: ['@typescript-eslint', 'prettier', 'react', 'jest', 'emotion'],
   extends: [
-    'eslint:recommended',
-    'prettier',
     'prettier/@typescript-eslint',
-    'prettier/react',
+    'plugin:@typescript-eslint/eslint-recommended',
+    'plugin:@typescript-eslint/recommended',
     'plugin:import/typescript',
+    'plugin:react/recommended',
+    'prettier/react',
+    'prettier',
     'plugin:import/errors',
     'plugin:import/warnings',
-    'plugin:@typescript-eslint/recommended',
-    'plugin:react/recommended',
     'plugin:jest/recommended',
     'plugin:jest/style',
   ],
   rules: {
+    // 'prettier/prettier': 'error',
+    '@typescript-eslint/explicit-function-return-type': 'off',
     'react/jsx-uses-react': 'error',
     'react/jsx-uses-vars': 'error',
     'jest/no-disabled-tests': 'warn',
@@ -45,10 +47,6 @@ module.exports = {
       // default to "createReactClass"
       pragma: 'React', // Pragma to use, default to "React"
       version: 'detect', // React version. "detect" automatically picks the version you have installed.
-      // You can also use `16.0`, `16.3`, etc, if you want to override the detected value.
-      // default to latest and warns if missing
-      // It will default to "detect" in the future
-      flowVersion: '0.53', // Flow version
     },
     propWrapperFunctions: [
       // The names of any function used to wrap propTypes, e.g. `forbidExtraProps`. If this isn't set, any propTypes wrapped in a function will be skipped.
@@ -63,4 +61,12 @@ module.exports = {
     ],
     'import/extensions': ['.js', '.jsx'],
   },
+  overrides: [
+    {
+      files: ['**/*.tsx'],
+      rules: {
+        'react/prop-types': 'off',
+      },
+    },
+  ],
 };

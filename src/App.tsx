@@ -1,20 +1,16 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { ConnectedRouter } from 'connected-react-router';
-import { History } from 'history';
-import routes from './routes/index.routes';
+import Routes from './routes/index.routes';
+import { ReactQueryDevtools } from 'react-query-devtools';
+
 import './App.css';
 
-interface AppProps {
-  history: History;
-}
-
-const App = ({ history }: AppProps) => {
+const App = (): JSX.Element => {
   return (
-    <ConnectedRouter history={history}>
-      <div className="App">{routes}</div>
-    </ConnectedRouter>
+    <>
+      <Routes />;
+      <ReactQueryDevtools initialIsOpen />
+    </>
   );
 };
 
-export default connect(null, null)(App);
+export default App;
