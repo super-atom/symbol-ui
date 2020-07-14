@@ -11,7 +11,7 @@ interface CounterState {
 
 const initialState: CounterState = {
   value: 0,
-  message: 'test',
+  message: '대기',
   error: null,
 };
 
@@ -34,7 +34,7 @@ const reducers = {
   },
   incrementByAmountFail: (state, { payload: error }) => {
     state.error = error;
-  }
+  },
 }
 
 export const slice = createSlice({

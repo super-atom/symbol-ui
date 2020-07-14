@@ -1,6 +1,6 @@
 import HomePage from './home.page';
 import CounterPage from './counterLegacy.page';
-import TestPage from './test.page';
-import ErrorPage from './error.page';
+import ErrorPage from './ErrorPage';
+import ProfileMainPage from './profile/ProfileMain';
 
-export { HomePage, CounterPage, TestPage, ErrorPage };
+export { HomePage, CounterPage, ErrorPage, ProfileMainPage };

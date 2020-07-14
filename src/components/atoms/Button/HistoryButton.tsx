@@ -1,17 +1,15 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import CounterLegacy from '../../features/counterLegacy/CounterLegacy';
+import styles from './styles.module.css';
 
-function CounterLegacyPage(): JSX.Element {
+export function BackButton({ text = 'BACK' }): JSX.Element {
   const history = useHistory();
+
   return (
     <>
-      <CounterLegacy />
       <button type="button" onClick={() => history.go(-1)}>
-        Back
+        {text}
       </button>
     </>
   );
 }
-
-export default CounterLegacyPage;

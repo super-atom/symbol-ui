@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { counterAction, counterSelector } from './slice';
 import styles from './Counter.module.css';
-import ErrorPage from '../../components/pages/error.page';
+import ErrorPage from 'components/pages/ErrorPage';
 
 function Counter(): JSX.Element {
   const dispatch = useDispatch();

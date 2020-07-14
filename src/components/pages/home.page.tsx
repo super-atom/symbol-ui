@@ -11,6 +11,8 @@ function HomePage(): JSX.Element {
       <Link to="/counter-legacy">CounterLegacy</Link>
       <hr />
       <Link to="/image-grid">ImageGrid</Link>
+      <hr />
+      <Link to="/profile">Profile</Link>
     </>
   );
 }

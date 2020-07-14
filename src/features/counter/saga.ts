@@ -1,4 +1,4 @@
-import { call, put, select, takeLatest, delay } from 'redux-saga/effects';
+import { put, select, takeLatest, delay } from 'redux-saga/effects';
 import { counterAction, counterSelector } from './slice';
 
 export function* incrementByAmountAsyncTest() {

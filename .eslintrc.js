@@ -17,17 +17,18 @@ module.exports = {
     'prettier/@typescript-eslint',
     'plugin:@typescript-eslint/eslint-recommended',
     'plugin:@typescript-eslint/recommended',
-    'plugin:import/typescript',
     'plugin:react/recommended',
     'prettier/react',
     'prettier',
     'plugin:import/errors',
     'plugin:import/warnings',
+    'plugin:import/typescript',
     'plugin:jest/recommended',
     'plugin:jest/style',
   ],
   rules: {
     // 'prettier/prettier': 'error',
+    'import/extensions': 'off',
     '@typescript-eslint/explicit-function-return-type': 'off',
     'react/jsx-uses-react': 'error',
     'react/jsx-uses-vars': 'error',
@@ -42,6 +43,21 @@ module.exports = {
     'emotion/styled-import': 'error',
   },
   settings: {
+    'import/extensions': ['.js', '.jsx', '.ts', '.tsx'],
+    'import/parsers': {
+      '@typescript-eslint/parser': ['.ts', '.tsx'],
+    },
+    'import/resolver': {
+      'babel-module': {},
+      node: {
+        paths: ['src'],
+        extensions: ['.js', '.jsx', '.ts', '.tsx'],
+        moduleDirectory: ['node_modules', '.'],
+      },
+      alias: {
+        extensions: ['.ts', '.js', '.jsx', '.tsx', '.json'],
+      },
+    },
     react: {
       createClass: 'createReactClass', // Regex for Component Factory to use,
       // default to "createReactClass"
@@ -59,7 +75,6 @@ module.exports = {
       'Hyperlink',
       { name: 'Link', linkAttribute: 'to' },
     ],
-    'import/extensions': ['.js', '.jsx'],
   },
   overrides: [
     {

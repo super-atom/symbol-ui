@@ -1,22 +1,26 @@
-import { call, takeEvery, put } from 'redux-saga/effects';
-import Axios from 'axios';
-import { fetchData } from './reducer';
-
-export const sagaActions = {
-  FETCH_DATA_SAGA: 'FETCH_DATA_SAGA',
-};
+import { call, select, put, takeLatest } from 'redux-saga/effects';
+import { getProfiles } from '../../api';
+import { profileAction, profileSelector } from './slice';
 
 export function* fetchDataSaga() {
+  const { fetchDataSuccess, fetchDataFail } = profileAction;
   try {
-    let result = yield call(() =>
-      Axios({ url: 'https://5ce2c23be3ced20014d35e3d.mockapi.io/api/todos' }),
-    );
-    yield put(fetchData(result.data));
-  } catch (e) {
-    yield put({ type: 'TODO_FETCH_FAILED' });
+    const options = yield select(profileSelector.options);
+    const profiles = yield call(getProfiles, options);
+    yield put(fetchDataSuccess({
+      profiles,
+      options
+    }));
+  } catch (err) {
+    yield put(fetchDataFail(err));
   }
 }
 
-export default function* rootSaga() {
-  yield takeEvery(sagaActions.FETCH_DATA_SAGA, fetchDataSaga);
+export function* watchProfile() {
+  const { load, loadMore, changeOptions, changeOptionPage } = profileAction;
+
+  yield takeLatest(load, fetchDataSaga);
+  yield takeLatest(loadMore, fetchDataSaga);
+  yield takeLatest(changeOptions, fetchDataSaga);
+  yield takeLatest(changeOptionPage, fetchDataSaga);
 }
