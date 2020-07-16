@@ -1,12 +1,13 @@
 import { call, select, put, takeLatest } from 'redux-saga/effects';
-import { getProfiles } from '../../api';
 import { profileAction, profileSelector } from './slice';
+import getProfiles from 'api/symbol/getProfiles';
 
 export function* fetchDataSaga() {
   const { fetchDataSuccess, fetchDataFail } = profileAction;
   try {
     const options = yield select(profileSelector.options);
     const profiles = yield call(getProfiles, options);
+
     yield put(fetchDataSuccess({
       profiles,
       options

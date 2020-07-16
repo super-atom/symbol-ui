@@ -1,5 +1,5 @@
 import React from 'react';
-import { BackButton } from '../../atoms/Button/HistoryButton';
+import { BackButton } from 'components/atoms/Button/HistoryButton';
 
 export default function DataViewer({ title, view }): JSX.Element {
   return (

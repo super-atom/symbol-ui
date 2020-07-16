@@ -10,7 +10,7 @@ export function* incrementByAmountAsyncTest() {
     yield delay(1000);
     yield put(
       incrementByAmountSuccess({
-        value: state.value + 2,
+        value: state.value,
         message: nextMessage
       })
     );

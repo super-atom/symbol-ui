@@ -2,29 +2,22 @@ import { createSelector, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from 'store/store';
 import initialState from './state';
 
-const name = 'profile';
+const name = 'caseElements';
 const reducers = {
   load: (state) => {
     state.isLoading = true;
   },
-  loadMore: (state) => {
-    return state;
-  },
   changeOptions: (state, action: PayloadAction<any>) => {
     state.options = action.payload;
-  },
-  changeOptionPage: (state, action: PayloadAction<number>) => {
-    state.options.page = action.payload;
   },
   fetchDataOption: (state, { payload: { limit, order, sortBy } }) => {
     state.options.limit = limit;
     state.options.order = order;
     state.options.sortBy = sortBy;
   },
-  fetchDataSuccess: (state, { payload: { profiles, options } }) => {
+  fetchDataSuccess: (state, { payload: { caseElements } }) => {
     state.isLoading = false;
-    state.profiles = profiles;
-    state.options = options;
+    state.caseElements = caseElements;
   },
   fetchDataFail: (state, { payload: error }) => {
     state.isLoading = false;
@@ -33,9 +26,9 @@ const reducers = {
 }
 export const slice = createSlice({ name, initialState, reducers });
 
-const selectProfiles = createSelector(
-  (state: RootState) => state.profiles,
-  (profiles) => profiles,
+const selectCaseElements = createSelector(
+  (state: RootState) => state.caseElements,
+  (caseElements) => caseElements,
 );
 
 const selectOptions = createSelector(
@@ -59,25 +52,25 @@ const selectError = createSelector(
 );
 
 const selectAllState = createSelector(
-  selectProfiles,
+  selectCaseElements,
   selectOptions,
   selectStatus,
   selectError,
   selectLoadingState,
   selectLoadingState,
-  (profiles, options, status, message, error, isLoading) => {
-    return { profiles, options, status, message, error, isLoading };
+  (caseElements, options, status, message, error, isLoading) => {
+    return { caseElements, options, status, message, error, isLoading };
   }
 );
 
-export const PROFILE = slice.name;
-export const profileReducer = slice.reducer;
-export const profileAction = slice.actions;
-export const profileSelector = {
-  all: (state: RootState) => selectAllState(state[PROFILE]),
-  profiles: (state: RootState) => selectProfiles(state[PROFILE]),
-  status: (state: RootState) => selectStatus(state[PROFILE]),
-  options: (state: RootState) => selectOptions(state[PROFILE]),
-  error: (state: RootState) => selectError(state[PROFILE]),
-  isLoading: (state: RootState) => selectLoadingState(state[PROFILE]),
+export const CASE_ELEMENTS = slice.name;
+export const caseElementsReducer = slice.reducer;
+export const caseElementsAction = slice.actions;
+export const caseElementsSelector = {
+  all: (state: RootState) => selectAllState(state[CASE_ELEMENTS]),
+  caseElements: (state: RootState) => selectCaseElements(state[CASE_ELEMENTS]),
+  status: (state: RootState) => selectStatus(state[CASE_ELEMENTS]),
+  options: (state: RootState) => selectOptions(state[CASE_ELEMENTS]),
+  error: (state: RootState) => selectError(state[CASE_ELEMENTS]),
+  isLoading: (state: RootState) => selectLoadingState(state[CASE_ELEMENTS]),
 };

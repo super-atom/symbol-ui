@@ -1,5 +1,5 @@
 import { createSelector, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { RootState } from '../../store/store';
+import { RootState } from 'store/store';
 
 const name = 'counter';
 
@@ -26,7 +26,7 @@ const reducers = {
     state.value += action.payload;
   },
   incrementByAmountAsync: (state, action: PayloadAction<number>) => {
-    false
+    state.value = action.payload
   },
   incrementByAmountSuccess: (state, { payload: { value, message } }) => {
     state.value = value;

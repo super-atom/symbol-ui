@@ -1,6 +1,6 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import Counter from '../../features/counter';
+import Counter from 'features/counter';
 
 function CounterPage(): JSX.Element {
   const history = useHistory();

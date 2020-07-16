@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import ImageGrid from '../../features/imageGrid';
+import ImageGrid from 'features/imageGrid';
 
 function ImageGridPage(): JSX.Element {
   const history = useHistory();

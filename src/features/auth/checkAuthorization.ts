@@ -1,18 +1,18 @@
-import { parseJwt } from '../../utils/index.utils';
+import parseJwt from 'utils/parseJwt';
 
 export const checkAuthorization = () => {
-    const storedToken = localStorage.getItem('token');
+  const storedToken = localStorage.getItem('token');
 
-    if (storedToken) {
-        const tokenPayload = parseJwt(storedToken);
+  if (storedToken) {
+    const tokenPayload = parseJwt(storedToken);
 
-        const expiration = new Date(tokenPayload.exp * 1000).getTime();
-        const current = new Date().getTime();
+    const expiration = new Date(tokenPayload.exp * 1000).getTime();
+    const current = new Date().getTime();
 
-        if (current > expiration) return false;
+    if (current > expiration) return false;
 
-        return true;
-    }
+    return true;
+  }
 
-    return false;
+  return false;
 };

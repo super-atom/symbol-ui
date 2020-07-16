@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { counterAction, counterSelector } from './slice';
-import styles from './Counter.module.css';
 import ErrorPage from 'components/pages/ErrorPage';
+import styles from './Counter.module.css';
 
 function Counter(): JSX.Element {
   const dispatch = useDispatch();
-  const { value, message, error } = useSelector(counterSelector.all);
+  const { value, error } = useSelector(counterSelector.all);
   const [incrementAmount, setIncrementAmount] = useState('2');
 
   if (error) return <ErrorPage />;
@@ -37,6 +37,7 @@ function Counter(): JSX.Element {
           value={incrementAmount}
           onChange={(e) => setIncrementAmount(e.target.value)}
         />
+
         <button
           className={styles.button}
           onClick={() =>

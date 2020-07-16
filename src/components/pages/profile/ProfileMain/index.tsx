@@ -1,15 +1,12 @@
 import React, { useCallback, useEffect } from 'react';
-import axios from 'axios';
-import { useQuery, useMutation, queryCache } from 'react-query';
 import { useSelector, useDispatch } from 'react-redux';
 import { profileAction, profileSelector } from 'features/profile/slice';
-import Profile from 'features/profile';
 import DataViewer from 'components/templates/DataViewer';
 import DataFilter from 'components/molecules/DataFilter';
 import Pagination from 'components/molecules/Pagination';
 import Loader from 'components/atoms/Loader';
 import ErrorPage from 'components/pages/ErrorPage';
-import styles from './styles.module.css';
+import styles from 'styles/common.module.css';
 
 function ProfileMainPage(): JSX.Element {
   const dispatch = useDispatch();
@@ -44,19 +41,25 @@ function ProfileMainPage(): JSX.Element {
               <div>아이템 수 : {profiles.data.count}</div>
               <div>현재 페이지 : {options.page}</div>
             </div>
-            <DataFilter />
-            <Profile />
+            <div className={styles.row}>
+              <DataFilter
+                options={options}
+                reducer={profileAction.changeOptions}
+              />
+            </div>
             <div className={styles.row}>
               <ul>
                 <List items={profiles.data.rows} fallback={<Loader />} />
               </ul>
             </div>
-            <Pagination
-              data={profiles.data}
-              options={options}
-              reducer={profileAction.changeOptionPage}
-              fallback={<Loader />}
-            />
+            <div className={styles.row}>
+              <Pagination
+                data={profiles.data}
+                options={options}
+                reducer={profileAction.changeOptionPage}
+                fallback={<Loader />}
+              />
+            </div>
           </>
         }
       />

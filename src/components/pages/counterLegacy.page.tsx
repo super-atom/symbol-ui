@@ -1,6 +1,6 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import CounterLegacy from '../../features/counterLegacy/CounterLegacy';
+import CounterLegacy from 'features/counterLegacy/CounterLegacy';
 
 function CounterLegacyPage(): JSX.Element {
   const history = useHistory();

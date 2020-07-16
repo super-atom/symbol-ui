@@ -1,5 +1,5 @@
-import { useDispatch } from 'react-redux';
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import styles from './styles.module.css';
 
 export default function Pagination({

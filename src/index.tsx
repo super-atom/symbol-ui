@@ -2,10 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
 import { Provider } from 'react-redux';
-import { store } from './store/store';
+import { store } from 'store/store';
 import * as serviceWorker from './serviceWorker';
 import App from './App';
-import './index.css';
+import 'styles/reset.css';
 
 const render = () => {
   ReactDOM.render(

@@ -1,13 +1,13 @@
 import { createSelector, createSlice } from '@reduxjs/toolkit';
-import { RootState } from '../../store/store';
+import { RootState } from 'store/store';
 
 const name = 'UNSPLASH';
 
 interface ImageGridState {
-  isLoading: boolean,
-  images: [],
-  error: any,
-  page: number
+  isLoading: boolean;
+  images: [];
+  error: any;
+  page: number;
 }
 
 export const initialState: ImageGridState = {

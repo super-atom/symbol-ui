@@ -1,7 +1,7 @@
 import React, { useEffect, useState, createRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { unsplashAction, unsplashSelector } from './slice';
-import { useInfinteScroll } from '../../hooks';
+import useInfinteScroll from 'hooks/useInfinteScroll';
 import ErrorPage from 'components/pages/ErrorPage';
 
 import './styles.css';
