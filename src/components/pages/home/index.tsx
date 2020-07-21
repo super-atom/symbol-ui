@@ -13,8 +13,6 @@ function HomePage(): JSX.Element {
       <Link to="/image-grid">ImageGrid</Link>
       <hr />
       <Link to="/profile">Profile</Link>
-      <hr />
-      <Link to="/case-elements">CaseElements</Link>
     </>
   );
 }

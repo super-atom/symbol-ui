@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import AuthRoute from 'features/auth/authRoutes';
 import PrivateRoute from 'features/auth/privateRoutes';
 import Loader from 'components/atoms/Loader';
+import * as RoutesPath from 'settings/variables/routesPath';
 
 const HomePage = lazy(() => import('components/pages/home'));
 const CounterPage = lazy(() => import('components/pages/counter.page'));
@@ -17,6 +18,12 @@ const ProfileMainPage = lazy(() =>
 const CaseElementsMainPage = lazy(() =>
   import('components/pages/caseElements/CaseElementsMain'),
 );
+const CaseConfigurationsMainPage = lazy(() =>
+  import('components/pages/caseElements/CaseConfigurationsMain'),
+);
+const PostVideoDetailPage = lazy(() =>
+  import('components/pages/postVideo/PostVideoDetail'),
+);
 
 const Routes = (): JSX.Element => (
   <BrowserRouter>
@@ -27,7 +34,17 @@ const Routes = (): JSX.Element => (
         <Route exact path="/counter" component={CounterPage} />
         <Route exact path="/counter-legacy" component={CounterLegacyPage} />
         <Route exact path="/profile" component={ProfileMainPage} />
-        <Route exact path="/case-elements" component={CaseElementsMainPage} />
+        <Route exact path="/cases/:id" component={CaseElementsMainPage} />
+        <Route
+          exact
+          path={'/' + RoutesPath.caseConfigurationPath + '/:id'}
+          component={CaseConfigurationsMainPage}
+        />
+        <Route
+          exact
+          path={'/' + RoutesPath.postVideoPath + '/:id'}
+          component={PostVideoDetailPage}
+        />
       </Switch>
     </Suspense>
   </BrowserRouter>

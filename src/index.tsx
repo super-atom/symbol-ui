@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
 import { Provider } from 'react-redux';
 import { store } from 'store/store';
+import { ReactQueryDevtools } from 'react-query-devtools';
 import * as serviceWorker from './serviceWorker';
 import App from './App';
 import 'styles/reset.css';
@@ -11,6 +12,7 @@ const render = () => {
   ReactDOM.render(
     <Provider store={store}>
       <App />
+      <ReactQueryDevtools initialIsOpen />
     </Provider>,
     document.getElementById('root'),
   );

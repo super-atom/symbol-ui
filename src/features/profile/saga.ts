@@ -1,6 +1,6 @@
 import { call, select, put, takeLatest } from 'redux-saga/effects';
 import { profileAction, profileSelector } from './slice';
-import getProfiles from 'api/symbol/getProfiles';
+import { getProfiles } from 'apis/symbol/profile';
 
 export function* fetchDataSaga() {
   const { fetchDataSuccess, fetchDataFail } = profileAction;

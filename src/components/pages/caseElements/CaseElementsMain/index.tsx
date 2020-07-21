@@ -1,138 +1,79 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import axios from 'axios';
-import { useSelector, useDispatch } from 'react-redux';
-import { usePaginatedQuery, queryCache } from 'react-query';
-import {
-  caseElementsAction,
-  caseElementsSelector,
-} from 'features/case/caseElements/slice';
-import DataViewer from 'components/templates/DataViewer';
-import DataFilter from 'components/molecules/DataFilter';
-import Pagination from 'components/molecules/Pagination';
+import React from 'react';
+import { useQuery } from 'react-query';
+import { useParams, Link } from 'react-router-dom';
+
 import Loader from 'components/atoms/Loader';
-import ErrorPage from 'components/pages/ErrorPage';
+import DataViewer from 'components/templates/DataViewer';
+import Youtube from 'react-youtube';
 import styles from 'styles/common.module.css';
-import { getCaseElementsQuery } from 'api/symbol/getCaseElements';
-import { API_URL } from 'settings/envConstant';
+import { postVideoPath } from 'settings/variables/routesPath';
+
+import { getCaseElementById } from 'apis/symbol/caseElement';
+import { getPostsByCaseElementId } from 'apis/symbol/post';
+import { getPostVideosByPostId } from 'apis/symbol/postVideo';
 
 export default function CaseElementsMainPage(): JSX.Element {
-  const dispatch = useDispatch();
-  const caseElements = useSelector(caseElementsSelector.caseElements);
-  const options = useSelector(caseElementsSelector.options);
-  const [page, setPage] = useState(1);
-  const [limit, setLimit] = useState(5);
-  const [order, setOrder] = useState('ASC');
-  const [sortBy, setSortBy] = useState('updatedAt');
-  let hasMore = true;
-  let count = 0;
-  let maxPage = 0;
+  const { id } = useParams();
 
-  useEffect(() => {
-    dispatch(caseElementsAction.load());
-  }, []);
+  const caseElement = useQuery(['caseElementQuery', id], getCaseElementById)
+    .data;
+  const posts = useQuery(['posts', id], getPostsByCaseElementId).data;
 
-  if (caseElements.data) {
-    count = caseElements.data.count;
-    maxPage = Math.ceil(count / limit);
-    if (maxPage === page) hasMore = false;
-  }
-
-  const CaseElementsMainPageQuery = useCallback(async (key, page) => {
-    const { data } = await axios
-      .get(
-        `${API_URL}/cases?page=${page}&limit=${limit}&order=${order}&sortBy=${sortBy}`,
-      )
-      .then((res) => res.data);
-
-    return data;
-  }, []);
-
-  const {
-    status,
-    resolvedData,
-    latestData,
-    error,
-    isFetching,
-  } = usePaginatedQuery(
-    ['CaseElementsMainPage', page],
-    CaseElementsMainPageQuery,
-    {},
-  );
-
-  useEffect(() => {
-    if (latestData || hasMore) {
-      queryCache.prefetchQuery(
-        ['CaseElementsMainPage', page + 1],
-        CaseElementsMainPageQuery,
-      );
-    }
-  }, [latestData, CaseElementsMainPageQuery, page]);
-
-  if (status === 'loading') return <Loader />;
-  else if (status === 'error') {
-    <ErrorPage />;
-    if (process.env.NODE_ENV === 'development') {
-      console.log('Error : ', error);
+  function List({ items }) {
+    if (!items) return false;
+    else {
+      const YoutubeOpt = {
+        width: '300',
+        height: '168',
+      };
+      return items.map((item) => {
+        const postVideo = useQuery(
+          ['postVideo' + '_' + item.post_id, item.post_id],
+          getPostVideosByPostId,
+        ).data;
+        if (!postVideo) return false;
+        return (
+          <li key={item.post_id}>
+            <div>
+              <Youtube
+                videoId={postVideo.post_video_access_code}
+                opts={YoutubeOpt}
+              />
+            </div>
+            <div>
+              <Link to={'../' + postVideoPath + '/' + postVideo.post_video_id}>
+                {item.post_content}
+              </Link>
+            </div>
+            <div>{item.createdAt}</div>
+            <div>{item.updatedAt}</div>
+          </li>
+        );
+      });
     }
   }
 
-  const List = (): JSX.Element => {
-    return resolvedData.rows.map((item) => {
-      return <li key={item.case_element_id}>{item.case_element_name}</li>;
-    });
-  };
-
+  if (!caseElement && !posts) return <Loader />;
   return (
     <>
       <DataViewer
-        title={'CaseElementsMainPage'}
+        title={caseElement.case_element_name}
         view={
           <>
             <div className={styles.column}>
-              <div>현재 페이지 : {page}</div>
+              <div>{caseElement.case_element_id}</div>
+              <div>{caseElement.case_element_name}</div>
+              <div>{caseElement.case_element_occurred_date}</div>
+              <div>{caseElement.createdAt}</div>
+              <div>{caseElement.updatedAt}</div>
             </div>
+            <br />
             <div className={styles.row}>
-              {/*
-              <DataFilter
-                options={options}
-                reducer={caseElementsAction.changeOptions}
-              />
-            */}
-            </div>
-            <div className={styles.row}>
-              <ul>
-                <List />
-              </ul>
-            </div>
-            <div className={styles.row}>
-              <span>Current Page: {page}</span>
-              <button
-                onClick={() => setPage((old) => Math.max(old - 1, 0))}
-                disabled={page === 1}
-              >
-                Previous Page
-              </button>{' '}
-              <button
-                onClick={() =>
-                  setPage((old) => (!latestData || !hasMore ? old : old + 1))
-                }
-                disabled={!latestData || !hasMore}
-              >
-                Next Page
-              </button>
-              {/*
-              <Pagination
-                data={api.data}
-                options={options}
-                reducer={caseElementsAction.changeOptions}
-                fallback={<Loader />}
-              />
-            */}
+              <List items={posts} />
             </div>
           </>
         }
       />
-      {isFetching ? <Loader /> : null}{' '}
     </>
   );
 }

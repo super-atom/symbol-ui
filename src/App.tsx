@@ -1,12 +1,14 @@
 import React from 'react';
 import Routes from 'routes/index.routes';
-import { ReactQueryDevtools } from 'react-query-devtools';
+import { ReactQueryConfigProvider } from 'react-query';
+import reactQueryConfig from 'settings/reactQueryConfig';
 
 const App = (): JSX.Element => {
   return (
     <>
-      <Routes />
-      <ReactQueryDevtools initialIsOpen />
+      <ReactQueryConfigProvider config={reactQueryConfig}>
+        <Routes />
+      </ReactQueryConfigProvider>
     </>
   );
 };

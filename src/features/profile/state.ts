@@ -15,7 +15,7 @@ const initialState: ProfileState = {
   profiles: [],
   options: {
     page: 1,
-    limit: 3,
+    limit: 15,
     order: 'ASC',
     sortBy: 'updatedAt',
   },
