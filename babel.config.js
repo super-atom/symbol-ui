@@ -19,5 +19,6 @@ module.exports = {
         root: ['./src'],
       },
     ],
+    ['emotion', { sourceMap: true }],
   ],
 };

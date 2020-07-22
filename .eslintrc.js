@@ -1,47 +1,43 @@
 module.exports = {
   root: true,
   env: {
-    'jest/globals': true,
-    es6: true,
     node: true,
+    browser: true,
+    'jest/globals': true,
   },
-  parser: '@typescript-eslint/parser',
+  parser: '@typescript-eslint/parser', // Specifies the ESLint parser
   parserOptions: {
-    sourceType: 'module',
+    ecmaVersion: 2018, // Allows for the parsing of modern ECMAScript features
+    sourceType: 'module', // Allows for the use of imports
     ecmaFeatures: {
-      jsx: true,
+      jsx: true, // Allows for the parsing of JSX
     },
   },
-  plugins: ['@typescript-eslint', 'prettier', 'react', 'jest', 'emotion'],
   extends: [
-    'prettier/@typescript-eslint',
-    'plugin:@typescript-eslint/eslint-recommended',
-    'plugin:@typescript-eslint/recommended',
     'plugin:react/recommended',
+    'plugin:@typescript-eslint/recommended',
+    'plugin:@typescript-eslint/eslint-recommended',
+    'prettier/@typescript-eslint',
+    'plugin:prettier/recommended',
     'prettier/react',
-    'prettier',
-    'plugin:import/errors',
-    'plugin:import/warnings',
-    'plugin:import/typescript',
     'plugin:jest/recommended',
     'plugin:jest/style',
   ],
+  plugins: ['react', '@typescript-eslint', 'jest', 'emotion', 'prettier'],
   rules: {
-    // 'prettier/prettier': 'error',
-    'import/extensions': 'off',
-    '@typescript-eslint/explicit-function-return-type': 'off',
     'react/jsx-uses-react': 'error',
     'react/jsx-uses-vars': 'error',
-    'jest/no-disabled-tests': 'warn',
-    'jest/no-focused-tests': 'error',
-    'jest/no-identical-title': 'error',
-    'jest/prefer-to-have-length': 'warn',
-    'jest/valid-expect': 'error',
-    'emotion/jsx-import': 'error',
-    'emotion/no-vanilla': 'error',
-    'emotion/import-from-emotion': 'error',
-    'emotion/styled-import': 'error',
   },
+  overrides: [
+    {
+      files: ['**/*.ts?(x)'],
+      rules: {
+        'react/prop-types': 'off',
+        'no-unused-vars': 'off',
+        'no-explicit-any': 'off',
+      },
+    },
+  ],
   settings: {
     'import/extensions': ['.js', '.jsx', '.ts', '.tsx'],
     'import/parsers': {
@@ -55,7 +51,7 @@ module.exports = {
         moduleDirectory: ['node_modules', '.'],
       },
       alias: {
-        extensions: ['.ts', '.js', '.jsx', '.tsx', '.json'],
+        extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
       },
     },
     react: {
@@ -76,12 +72,4 @@ module.exports = {
       { name: 'Link', linkAttribute: 'to' },
     ],
   },
-  overrides: [
-    {
-      files: ['**/*.tsx'],
-      rules: {
-        'react/prop-types': 'off',
-      },
-    },
-  ],
 };

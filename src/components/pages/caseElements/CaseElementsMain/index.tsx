@@ -1,10 +1,10 @@
 import React from 'react';
 import { useQuery } from 'react-query';
 import { useParams, Link } from 'react-router-dom';
+import Youtube from 'react-youtube';
 
 import Loader from 'components/atoms/Loader';
 import DataViewer from 'components/templates/DataViewer';
-import Youtube from 'react-youtube';
 import styles from 'styles/common.module.css';
 import { postVideoPath } from 'settings/variables/routesPath';
 

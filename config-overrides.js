@@ -1,9 +1,9 @@
-const path = require('path');
 const {
   override,
   useBabelRc,
   useEslintRc,
   addWebpackAlias,
+  addBabelPreset,
 } = require('customize-cra');
 
 module.exports = override(
@@ -12,4 +12,5 @@ module.exports = override(
   addWebpackAlias({
     'react-dom': '@hot-loader/react-dom',
   }),
+  addBabelPreset('@emotion/babel-preset-css-prop'),
 );

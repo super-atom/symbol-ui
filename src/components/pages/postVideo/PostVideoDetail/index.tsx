@@ -13,7 +13,6 @@ export default function PostVideoDetail(): JSX.Element {
   const { id } = useParams();
 
   const postVideo = useQuery(['postVideo', id], getPostVideosById).data;
-  console.log('??', postVideo);
 
   if (!postVideo) return <Loader />;
   return (

@@ -5,6 +5,8 @@ import AuthRoute from 'features/auth/authRoutes';
 import PrivateRoute from 'features/auth/privateRoutes';
 import Loader from 'components/atoms/Loader';
 import * as RoutesPath from 'settings/variables/routesPath';
+import MainNavigator from 'components/layout/MainNavigator';
+import styles from './styles.module.scss';
 
 const HomePage = lazy(() => import('components/pages/home'));
 const CounterPage = lazy(() => import('components/pages/counter.page'));
@@ -28,24 +30,27 @@ const PostVideoDetailPage = lazy(() =>
 const Routes = (): JSX.Element => (
   <BrowserRouter>
     <Suspense fallback={<Loader />}>
-      <Switch>
-        <Route exact path="/" component={HomePage} />
-        <Route exact path="/image-grid" component={ImageGridPage} />
-        <Route exact path="/counter" component={CounterPage} />
-        <Route exact path="/counter-legacy" component={CounterLegacyPage} />
-        <Route exact path="/profile" component={ProfileMainPage} />
-        <Route exact path="/cases/:id" component={CaseElementsMainPage} />
-        <Route
-          exact
-          path={'/' + RoutesPath.caseConfigurationPath + '/:id'}
-          component={CaseConfigurationsMainPage}
-        />
-        <Route
-          exact
-          path={'/' + RoutesPath.postVideoPath + '/:id'}
-          component={PostVideoDetailPage}
-        />
-      </Switch>
+      <MainNavigator />
+      <div className={styles.MainContents}>
+        <Switch>
+          <Route exact path="/" component={HomePage} />
+          <Route exact path="/image-grid" component={ImageGridPage} />
+          <Route exact path="/counter" component={CounterPage} />
+          <Route exact path="/counter-legacy" component={CounterLegacyPage} />
+          <Route exact path="/profile" component={ProfileMainPage} />
+          <Route exact path="/cases/:id" component={CaseElementsMainPage} />
+          <Route
+            exact
+            path={'/' + RoutesPath.caseConfigurationPath + '/:id'}
+            component={CaseConfigurationsMainPage}
+          />
+          <Route
+            exact
+            path={'/' + RoutesPath.postVideoPath + '/:id'}
+            component={PostVideoDetailPage}
+          />
+        </Switch>
+      </div>
     </Suspense>
   </BrowserRouter>
 );

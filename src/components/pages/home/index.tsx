@@ -1,18 +1,18 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-
+import { css } from '@emotion/core';
 function HomePage(): JSX.Element {
+  const sample = css`
+    background-color: hotpink;
+  `;
+  const test = css`
+    font-size: 50px;
+  `;
   return (
     <>
-      <div>THIS IS HOME</div>
-      <hr />
-      <Link to="/counter">Counter</Link>
-      <hr />
-      <Link to="/counter-legacy">CounterLegacy</Link>
-      <hr />
-      <Link to="/image-grid">ImageGrid</Link>
-      <hr />
-      <Link to="/profile">Profile</Link>
+      <style>{`.base {color: red}`}</style>
+      <div className="base" css={[test, sample]}>
+        THIS IS HOME
+      </div>
     </>
   );
 }
